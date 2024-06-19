@@ -13,7 +13,7 @@ Clone the repository:
 
 bash
 Copy code
-git clone https://github.com/yourusername/ArkNative.git
+git clone [https://github.com/088871/ArkNative.git](https://github.com/88871/ReactNative-Ark-088871)
 cd ArkNative
 Install the dependencies:
 
@@ -75,4 +75,4 @@ License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 Contact
-If you have any questions or suggestions, feel free to reach out at [your-email@example.com].
+If you have any questions or suggestions, feel free to reach out at [088871@glr.nl].
