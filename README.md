@@ -13,7 +13,7 @@ Clone the repository:
 
 bash
 Copy code
-git clone [https://github.com/088871/ArkNative.git](https://github.com/88871/ReactNative-Ark-088871)
+git clone https://github.com/88871/ReactNative-Ark-088871
 cd ArkNative
 Install the dependencies:
 
