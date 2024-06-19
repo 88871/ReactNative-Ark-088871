@@ -1,4 +1,4 @@
-ArkNative App
+# ArkNative App
 ArkNative is a React Native application designed for players of Ark Survival Ascended. The app includes a comprehensive list of in-game commands and dinosaur categories, allowing players to easily search and access relevant information.
 
 Features
@@ -7,11 +7,8 @@ Dino List: Browse and search through different dinosaur categories, each with de
 Dark and Light Themes: Toggle between dark and light themes for better visibility based on your preference.
 Search Functionality: Easily search for commands or dinosaurs using the integrated search bar.
 Category Filters: Filter dinosaurs by specific categories such as Healer, Soaker, Damage Dealer, etc.
-Screenshots
 
-
-
-Installation
+## Installation
 Clone the repository:
 
 bash
@@ -40,12 +37,11 @@ Copy code
 npm run android
 
 
-Usage
+## Usage
 Adding Commands
 To add new commands, edit the assets/commands.js file. The structure should follow:
 
-javascript
-Copy code
+```javascript
 export const CommandList  = [
   {
     "Command": "AddExperience",
@@ -54,11 +50,11 @@ export const CommandList  = [
   },
   ...
 ];
+```
 Adding Dinosaurs
 To add new dinosaurs, edit the assets/creatures.js file. The structure should follow:
 
-javascript
-Copy code
+```javascript
 export const dinosaurs = [
   {
     "Field1": "Tyrannosaurus Rex",
@@ -68,6 +64,7 @@ export const dinosaurs = [
   },
   ...
 ];
+```
 Contributing
 Fork the repository.
 Create a new branch: git checkout -b feature-branch-name.
