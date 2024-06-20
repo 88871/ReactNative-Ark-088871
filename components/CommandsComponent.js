@@ -1,34 +1,32 @@
 import React from 'react';
-import { FlatList, View, Text, Image, StyleSheet, TextInput } from 'react-native';
+import { FlatList, View, Text, Image, StyleSheet } from 'react-native';
 import { CommandList } from '../assets/commands'; // Import the commands
 import TesterChatIcon from '../assets/TesterChat_Icon.png'; // Import the image
-import { lightTheme, darkTheme } from './Theme'; // Ensure to import themes
+import { lightTheme, darkTheme } from './Theme'; // Import the themes
 
-const CommandsComponent = ({ searchQuery, setSearchQuery, isDarkMode }) => {
-  const filteredCommands = CommandList.filter(
-    (command) =>
-      command.Command.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      command.CommandDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      command.CommandID.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
+const CommandsComponent = ({ isDarkMode, searchQuery }) => {
   const currentStyles = isDarkMode ? darkTheme : lightTheme;
 
+  const filteredCommandList = CommandList.filter(item => {
+    if (!item.Command) return false;
+    return item.Command.toLowerCase().includes(searchQuery.toLowerCase());
+  });
+
   return (
-    <View style={[styles.container, currentStyles.container]}>
+    <View style={currentStyles.container}>
       <FlatList
-        data={filteredCommands}
+        data={filteredCommandList}
         keyExtractor={(item) => item.Command}
         renderItem={({ item }) => (
-          <View style={[styles.commandItem, currentStyles.commandItem]}>
+          <View style={styles.commandItem}>
             <Image
               source={TesterChatIcon}
               style={styles.icon}
             />
             <View style={styles.textContainer}>
-              <Text style={[styles.commandName, currentStyles.text]}>{item.Command}</Text>
-              <Text style={[styles.commandDesc, currentStyles.text]}>{item.CommandDesc}</Text>
-              <Text style={[styles.commandID, currentStyles.commandID]}>{item.CommandID}</Text>
+              <Text style={styles.commandName}>{item.Command}</Text>
+              <Text style={styles.commandDesc}>{item.CommandDesc}</Text>
+              <Text style={styles.commandID}>{item.CommandID}</Text>
             </View>
           </View>
         )}
@@ -40,18 +38,15 @@ const CommandsComponent = ({ searchQuery, setSearchQuery, isDarkMode }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#121212',
     padding: 20,
-  },
-  searchInput: {
-    marginBottom: 20,
-    padding: 10,
-    borderRadius: 10,
   },
   commandItem: {
     flexDirection: 'row',
     backgroundColor: '#1F1F1F',
     padding: 15,
     marginVertical: 10,
+    marginHorizontal: 10, // Add horizontal margin to each command item
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -70,9 +65,11 @@ const styles = StyleSheet.create({
   commandName: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: '#FFF',
   },
   commandDesc: {
     fontSize: 14,
+    color: '#AAA',
     marginVertical: 5,
   },
   commandID: {

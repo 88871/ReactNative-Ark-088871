@@ -9,7 +9,7 @@ export const lightTheme = {
     paddingTop: 50,
   },
   title: {
-    fontSize: 26, // Increased font size
+    fontSize: 26,
     textAlign: 'center',
     marginBottom: 20,
     color: '#333',
@@ -25,13 +25,13 @@ export const lightTheme = {
     marginVertical: 5,
   },
   sectionHeader: {
-    fontSize: 22, // Increased font size
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#333',
   },
   sectionDescription: {
-    fontSize: 16, // Increased font size
-    color: '#990099', // Darker purple for descriptions
+    fontSize: 16,
+    color: '#990099',
   },
   row: {
     flexDirection: 'row',
@@ -92,7 +92,7 @@ export const lightTheme = {
     backgroundColor: '#f0f0f0',
     borderRadius: 10,
     marginRight: 10,
-    fontSize: 18, // Increased font size
+    fontSize: 18,
   },
   menuButton: {
     padding: 5,
@@ -105,7 +105,7 @@ export const lightTheme = {
     padding: 10,
     borderRadius: 10,
     textAlign: 'center',
-    fontSize: 18, // Increased font size
+    fontSize: 18,
   },
   button: {
     backgroundColor: '#007bff',
@@ -117,7 +117,7 @@ export const lightTheme = {
   },
   buttonText: {
     color: '#fff',
-    fontSize: 18, // Increased font size
+    fontSize: 18,
   },
   resultItem: {
     backgroundColor: '#e0e0e0',
@@ -129,7 +129,7 @@ export const lightTheme = {
   },
   resultText: {
     color: '#333',
-    fontSize: 18, // Increased font size
+    fontSize: 18,
   },
   purpleText: {
     color: '#C726DF',
@@ -157,7 +157,7 @@ export const lightTheme = {
     paddingHorizontal: 20,
   },
   menuText: {
-    fontSize: 20, // Increased font size
+    fontSize: 20,
   },
 };
 
@@ -168,7 +168,7 @@ export const darkTheme = {
     paddingTop: 50,
   },
   title: {
-    fontSize: 26, // Increased font size
+    fontSize: 26,
     textAlign: 'center',
     marginBottom: 20,
     color: '#e0e0e0',
@@ -184,13 +184,13 @@ export const darkTheme = {
     marginVertical: 5,
   },
   sectionHeader: {
-    fontSize: 22, // Increased font size
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#e0e0e0',
   },
   sectionDescription: {
-    fontSize: 16, // Increased font size
-    color: '#b36fb3', // Lighter purple for descriptions
+    fontSize: 16,
+    color: '#b36fb3',
   },
   row: {
     flexDirection: 'row',
@@ -253,7 +253,7 @@ export const darkTheme = {
     borderRadius: 10,
     marginRight: 10,
     color: '#e0e0e0',
-    fontSize: 18, // Increased font size
+    fontSize: 18,
   },
   menuButton: {
     padding: 5,
@@ -266,7 +266,7 @@ export const darkTheme = {
     padding: 10,
     borderRadius: 10,
     textAlign: 'center',
-    fontSize: 18, // Increased font size
+    fontSize: 18,
   },
   button: {
     backgroundColor: '#C726DF',
@@ -278,7 +278,7 @@ export const darkTheme = {
   },
   buttonText: {
     color: '#fff',
-    fontSize: 18, // Increased font size
+    fontSize: 18,
   },
   resultItem: {
     backgroundColor: '#444',
@@ -290,7 +290,7 @@ export const darkTheme = {
   },
   resultText: {
     color: '#C726DF',
-    fontSize: 18, // Increased font size
+    fontSize: 18,
   },
   purpleText: {
     color: '#C726DF',
@@ -318,6 +318,6 @@ export const darkTheme = {
     paddingHorizontal: 20,
   },
   menuText: {
-    fontSize: 20, // Increased font size
+    fontSize: 20,
   },
 };

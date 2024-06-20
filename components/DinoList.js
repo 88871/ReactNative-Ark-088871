@@ -1,3 +1,4 @@
+// DinoList.js
 import React, { useState } from "react";
 import { View, Text, SectionList, StyleSheet, Dimensions, Image, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -7,6 +8,7 @@ import GradientButton from '../components/GradientButton'; // Adjust the import 
 const screenWidth = Dimensions.get("window").width / 2 - 20;
 
 const icons = {
+  "All Dinos": "apps-outline",
   Healer: "pulse-outline",
   Soaker: "shield-outline",
   "Damage Dealer": "flash-outline",
@@ -23,10 +25,10 @@ const icons = {
 const categories = ["All Dinos", "Healer", "Soaker", "Damage Dealer", "Supporter", "Farmer", "Taming & Breeding", "Water", "Shoulder Pets", "Climber", "Flyer", "Misc"];
 
 const DinoList = ({ sections, isDarkMode }) => {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("All Dinos");
   const currentStyles = isDarkMode ? darkTheme : lightTheme;
 
-  const filteredSections = selectedCategory === "All"
+  const filteredSections = selectedCategory === "All Dinos"
     ? sections
     : sections.map((section) => ({
         ...section,
@@ -67,7 +69,12 @@ const DinoList = ({ sections, isDarkMode }) => {
         {categories.map((category) => (
           <GradientButton
             key={category}
-            title={category}
+            title={
+              <View style={styles.buttonContent}>
+                <Ionicons name={icons[category]} size={16} color="#fff" />
+                <Text style={styles.buttonText}>{category}</Text>
+              </View>
+            }
             onPress={() => setSelectedCategory(category)}
             colors={selectedCategory === category ? ['#D0A0D0', '#8F508F'] : ['#8F508F', '#8F508F', '#8F508F']}
           />
@@ -97,6 +104,14 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
     marginVertical: 10,
+  },
+  buttonContent: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  buttonText: {
+    color: '#fff',
+    marginLeft: 5,
   },
 });
 

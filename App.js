@@ -8,6 +8,7 @@ import Sidebar from "./components/Sidebar";
 import { lightTheme, darkTheme } from "./components/Theme";
 import { dinosaurs } from "./assets/creatures";
 import CommandsComponent from "./components/CommandsComponent";
+import ArkServerLookup from "./components/ArkServerLookup"; // Import the new component
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -66,16 +67,15 @@ export default function App() {
         <DinoList sections={filteredSections} isDarkMode={isDarkMode} />
       )}
       {currentTab === "commands" && (
-        <CommandsComponent
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          isDarkMode={isDarkMode}
-        />
+        <CommandsComponent searchQuery={searchQuery} isDarkMode={isDarkMode} />
+      )}
+      {currentTab === "arklookup" && (
+        <ArkServerLookup isDarkMode={isDarkMode} />
       )}
       <StatusBar style="auto" />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
