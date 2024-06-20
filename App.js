@@ -8,7 +8,9 @@ import Sidebar from "./components/Sidebar";
 import { lightTheme, darkTheme } from "./components/Theme";
 import { dinosaurs } from "./assets/creatures";
 import CommandsComponent from "./components/CommandsComponent";
-import ArkServerLookup from "./components/ArkServerLookup"; // Import the new component
+import ArkServerLookup from "./components/ArkServerLookup";
+import TekGeneratorCalculator from "./components/TekGeneratorCalculator"; // Add this line
+import KibblePage from "./components/KibblePage"; // Add this line
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -71,6 +73,12 @@ export default function App() {
       )}
       {currentTab === "arklookup" && (
         <ArkServerLookup isDarkMode={isDarkMode} />
+      )}
+      {currentTab === "tekcalc" && (
+        <TekGeneratorCalculator isDarkMode={isDarkMode} />
+      )}
+      {currentTab === "kibble" && (
+        <KibblePage />
       )}
       <StatusBar style="auto" />
     </View>

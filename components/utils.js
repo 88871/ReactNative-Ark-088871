@@ -11,7 +11,6 @@ export const formatData = (data, numColumns) => {
     numberOfElementsLastRow++;
   }
 
-  // Group data into rows of numColumns items
   const formattedData = [];
   for (let i = 0; i < data.length; i += numColumns) {
     formattedData.push(data.slice(i, i + numColumns));
