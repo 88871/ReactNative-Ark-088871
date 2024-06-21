@@ -19,14 +19,15 @@ const TekGeneratorCalculator = ({ isDarkMode }) => {
       return;
     }
 
-    const baseDurationPerElement = 1.8; // days per element at radius 1 (assumed value)
-    const radiusFactor = Math.pow(radius, 1.2); // assumed formula for radius impact
+    const baseConsumptionPer18Hours = 1; // base consumption of 1 element per 18 hours at radius 1.0
+    const radiusFactor = 1 + 0.33 * (radius - 1); // consumption increases by 0.33 per additional unit of radius
     const fuelUnits = fuelType === "Element" ? Number(fuelAmount) : Number(fuelAmount) / 100;
-    const totalDuration = (fuelUnits * baseDurationPerElement) / radiusFactor;
+    const consumptionPer18Hours = baseConsumptionPer18Hours * radiusFactor;
+    const totalDurationInHours = (fuelUnits / consumptionPer18Hours) * 18;
 
-    const days = Math.floor(totalDuration);
-    const hours = Math.floor((totalDuration - days) * 24);
-    const minutes = Math.floor(((totalDuration - days) * 24 - hours) * 60);
+    const days = Math.floor(totalDurationInHours / 24);
+    const hours = Math.floor(totalDurationInHours % 24);
+    const minutes = Math.floor(((totalDurationInHours % 24) - hours) * 60);
 
     setResult(`${days} days ${hours} hours ${minutes} minutes`);
   };

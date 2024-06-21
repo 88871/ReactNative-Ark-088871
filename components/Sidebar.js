@@ -6,7 +6,7 @@ const Sidebar = ({ isDarkMode, setMenuOpen, setCurrentTab }) => {
   const menuItems = [
     { name: "Dino List", icon: "paw-outline", tab: "dinolist", color: "#FF5733" },
     { name: "Commands", icon: "terminal-outline", tab: "commands", color: "#33FF57" },
-    { name: "Ark Servers", icon: "server-outline", tab: "arklookup", color: "#3357FF" },
+    { name: "Ark Server Lookup", icon: "search-outline", tab: "arklookup", color: "#3357FF" },
     { name: "Tek Generator", icon: "nuclear-outline", tab: "tekcalc", color: "#FF33A6" },
     { name: "Kibble", icon: "fast-food-outline", tab: "kibble", color: "#FF33A6" },
     { name: "Items", icon: "cube-outline", tab: "items", color: "#FFA500" }, // Added Items

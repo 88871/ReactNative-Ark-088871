@@ -1,17 +1,24 @@
+// components/ItemDetails.js
 import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import { lightTheme, darkTheme } from './Theme';
-import itemImages from './itemImages'; // Import the generated itemImages
-import GradientButton from './GradientButton'; // Import the GradientButton component
+import itemImages from './itemImages';
+import Breadcrumbs from './Breadcrumbs';
 
 const ItemDetails = ({ route }) => {
-  const { item, isDarkMode } = route.params; // Retrieve isDarkMode from route params
+  const { item, isDarkMode } = route.params;
   const currentStyles = isDarkMode ? darkTheme : lightTheme;
-  const navigation = useNavigation();
+
+  const breadcrumbs = [
+    { label: 'Home', route: 'Home' },
+    { label: 'Items', route: 'ItemPage' },
+    { label: item.name, route: 'ItemDetails' },
+  ];
 
   return (
     <ScrollView style={currentStyles.container}>
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
       <View style={[styles.itemDetailsContainer, currentStyles.itemDetailsContainer]}>
         <Image
           source={itemImages[item.icon_name]}
@@ -20,11 +27,6 @@ const ItemDetails = ({ route }) => {
         />
         <Text style={[styles.title, currentStyles.title]}>{item.name}</Text>
         <Text style={[styles.description, currentStyles.text]}>{item.description}</Text>
-        <GradientButton
-          title="Back"
-          onPress={() => navigation.goBack()}
-          colors={['#D0A0D0', '#8F508F']}
-        />
       </View>
     </ScrollView>
   );

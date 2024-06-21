@@ -1,4 +1,3 @@
-// DinoList.js
 import React, { useRef, useState } from "react";
 import { View, Text, SectionList, StyleSheet, Dimensions, Image, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -45,7 +44,7 @@ const DinoList = ({ sections, isDarkMode }) => {
           return <View style={[currentStyles.itemContainer, currentStyles.itemInvisible]} key={dino.key} />;
         }
         return (
-          <View style={currentStyles.itemContainer} key={dino.Field1}>
+          <View style={[currentStyles.itemContainer, styles.shadow]} key={dino.Field1}>
             <Image source={dino.Image} style={currentStyles.image} resizeMode="contain" />
             <Text style={currentStyles.text}>{dino.Field1}</Text>
           </View>
@@ -134,6 +133,16 @@ const styles = StyleSheet.create({
     bottom: 20,
     right: 20,
     backgroundColor: 'transparent',
+  },
+  shadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.03,
+    shadowRadius: 2.62,
+    elevation: 4,
   },
 });
 

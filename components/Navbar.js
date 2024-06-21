@@ -1,7 +1,9 @@
+// components/Navbar.js
 import React from 'react';
 import { View, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { lightTheme, darkTheme } from './Theme';
+import DarkModeToggle from './DarkModeToggle';
 
 const Navbar = ({ isDarkMode, menuOpen, setMenuOpen, searchQuery, setSearchQuery, toggleTheme }) => {
   const currentStyles = isDarkMode ? darkTheme : lightTheme;
@@ -18,13 +20,7 @@ const Navbar = ({ isDarkMode, menuOpen, setMenuOpen, searchQuery, setSearchQuery
         value={searchQuery}
         onChangeText={setSearchQuery}
       />
-      <TouchableOpacity onPress={toggleTheme} style={styles.themeButton}>
-        <Ionicons 
-          name={isDarkMode ? 'moon-outline' : 'sunny-outline'} 
-          size={24} 
-          color={isDarkMode ? '#b36fb3' : '#121212'} 
-        />
-      </TouchableOpacity>
+      <DarkModeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
     </View>
   );
 };
@@ -45,7 +41,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginRight: 10,
   },
-  themeButton: {
+  toggleButton: {
     padding: 5,
   },
 });

@@ -55,7 +55,7 @@ const HomeScreen = ({ isDarkMode, currentTab, searchQuery, setSearchQuery, setMe
         <KibblePage isDarkMode={isDarkMode} />
       )}
       {currentTab === "items" && (
-        <ItemPage isDarkMode={isDarkMode} />
+        <ItemPage searchQuery={searchQuery} isDarkMode={isDarkMode} />
       )}
     </>
   );
