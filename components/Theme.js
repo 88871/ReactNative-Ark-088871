@@ -1,21 +1,23 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const screenWidth = Dimensions.get('window').width / 2 - 20;
 
-export const lightTheme = {
+export const lightTheme = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f0f0f0',
     paddingTop: 50,
   },
   title: {
-    fontSize: 26, // Increased font size
+    fontSize: 26,
     textAlign: 'center',
     marginBottom: 20,
     color: '#333',
   },
   text: {
     color: '#333',
+    textAlign: 'center',
+    marginTop: 10,
   },
   sectionList: {
     paddingHorizontal: 10,
@@ -28,13 +30,13 @@ export const lightTheme = {
     marginVertical: 5,
   },
   sectionHeader: {
-    fontSize: 22, // Increased font size
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#333',
   },
   sectionDescription: {
-    fontSize: 16, // Increased font size
-    color: '#990099', // Darker purple for descriptions
+    fontSize: 16,
+    color: '#990099',
   },
   row: {
     flexDirection: 'row',
@@ -55,17 +57,25 @@ export const lightTheme = {
     shadowRadius: 1,
     elevation: 1,
   },
+  itemDetailsContainer: {
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 10,
+    padding: 20,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 1 },
+    shadowRadius: 1,
+    elevation: 1,
+  },
   itemInvisible: {
     backgroundColor: 'transparent',
   },
-  text: {
-    color: '#007bff',
-    textAlign: 'center',
-    marginTop: 10,
-  },
   image: {
     width: '100%',
-    height: 110,
+    height: 200,
   },
   switchContainer: {
     flexDirection: 'row',
@@ -95,7 +105,7 @@ export const lightTheme = {
     backgroundColor: '#f0f0f0',
     borderRadius: 10,
     marginRight: 10,
-    fontSize: 18, // Increased font size
+    fontSize: 18,
   },
   menuButton: {
     padding: 5,
@@ -108,19 +118,17 @@ export const lightTheme = {
     padding: 10,
     borderRadius: 10,
     textAlign: 'center',
-    fontSize: 18, // Increased font size
+    fontSize: 18,
   },
   button: {
     backgroundColor: '#007bff',
     padding: 10,
     borderRadius: 10,
-    width: '80%',
     alignItems: 'center',
-    marginVertical: 10,
   },
   buttonText: {
     color: '#fff',
-    fontSize: 18, // Increased font size
+    fontSize: 16,
   },
   resultItem: {
     backgroundColor: '#e0e0e0',
@@ -132,7 +140,7 @@ export const lightTheme = {
   },
   resultText: {
     color: '#333',
-    fontSize: 18, // Increased font size
+    fontSize: 18,
   },
   purpleText: {
     color: '#C726DF',
@@ -160,27 +168,50 @@ export const lightTheme = {
     paddingHorizontal: 20,
   },
   menuText: {
-    fontSize: 20, // Increased font size
+    fontSize: 20,
   },
   kibbleSection: {
     backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 10,
   },
-};
+  kibbleHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  kibbleImage: {
+    width: 50,
+    height: 50,
+    marginRight: 10,
+  },
+  kibbleDetails: {
+    fontSize: 14,
+    marginTop: 10,
+  },
+});
 
-export const darkTheme = {
+export const darkTheme = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#121212',
     paddingTop: 50,
   },
+  note: {
+    color: '#e0e0e0',
+    backgroundColor: '#2c2c2c',
+    borderColor: '#d16ee0',
+  },
   title: {
-    fontSize: 26, // Increased font size
+    fontSize: 26,
     textAlign: 'center',
     marginBottom: 20,
     color: '#e0e0e0',
   },
   text: {
     color: '#e0e0e0',
+    textAlign: 'center',
+    marginTop: 10,
   },
   sectionList: {
     paddingHorizontal: 10,
@@ -193,13 +224,13 @@ export const darkTheme = {
     marginVertical: 5,
   },
   sectionHeader: {
-    fontSize: 22, // Increased font size
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#e0e0e0',
   },
   sectionDescription: {
-    fontSize: 16, // Increased font size
-    color: '#b36fb3', // Lighter purple for descriptions
+    fontSize: 16,
+    color: '#b36fb3',
   },
   row: {
     flexDirection: 'row',
@@ -220,17 +251,25 @@ export const darkTheme = {
     shadowRadius: 2,
     elevation: 2,
   },
+  itemDetailsContainer: {
+    backgroundColor: '#1f1f1f',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 10,
+    padding: 20,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.5,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 2,
+    elevation: 2,
+  },
   itemInvisible: {
     backgroundColor: 'transparent',
   },
-  text: {
-    color: '#fff',
-    textAlign: 'center',
-    marginTop: 10,
-  },
   image: {
     width: '100%',
-    height: 110,
+    height: 200,
   },
   switchContainer: {
     flexDirection: 'row',
@@ -262,7 +301,7 @@ export const darkTheme = {
     borderRadius: 10,
     marginRight: 10,
     color: '#e0e0e0',
-    fontSize: 18, // Increased font size
+    fontSize: 18,
   },
   menuButton: {
     padding: 5,
@@ -275,19 +314,17 @@ export const darkTheme = {
     padding: 10,
     borderRadius: 10,
     textAlign: 'center',
-    fontSize: 18, // Increased font size
+    fontSize: 18,
   },
   button: {
     backgroundColor: '#C726DF',
     padding: 10,
     borderRadius: 10,
-    width: '80%',
     alignItems: 'center',
-    marginVertical: 10,
   },
   buttonText: {
     color: '#fff',
-    fontSize: 18, // Increased font size
+    fontSize: 16,
   },
   resultItem: {
     backgroundColor: '#444',
@@ -299,7 +336,7 @@ export const darkTheme = {
   },
   resultText: {
     color: '#C726DF',
-    fontSize: 18, // Increased font size
+    fontSize: 18,
   },
   purpleText: {
     color: '#C726DF',
@@ -327,9 +364,25 @@ export const darkTheme = {
     paddingHorizontal: 20,
   },
   menuText: {
-    fontSize: 20, // Increased font size
+    fontSize: 20,
   },
   kibbleSection: {
     backgroundColor: '#1f1f1f',
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 10,
   },
-};
+  kibbleHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  kibbleImage: {
+    width: 50,
+    height: 50,
+    marginRight: 10,
+  },
+  kibbleDetails: {
+    fontSize: 14,
+    marginTop: 10,
+  },
+});

@@ -1,5 +1,5 @@
 // DinoList.js
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { View, Text, SectionList, StyleSheet, Dimensions, Image, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { lightTheme, darkTheme } from "./Theme";
@@ -27,6 +27,7 @@ const categories = ["All Dinos", "Healer", "Soaker", "Damage Dealer", "Supporter
 const DinoList = ({ sections, isDarkMode }) => {
   const [selectedCategory, setSelectedCategory] = useState("All Dinos");
   const currentStyles = isDarkMode ? darkTheme : lightTheme;
+  const listRef = useRef(null);
 
   const filteredSections = selectedCategory === "All Dinos"
     ? sections
@@ -63,30 +64,45 @@ const DinoList = ({ sections, isDarkMode }) => {
     </View>
   );
 
+  const renderCategorySelector = () => (
+    <View style={styles.categoryContainer}>
+      {categories.map((category) => (
+        <GradientButton
+          key={category}
+          title={
+            <View style={styles.buttonContent}>
+              <Ionicons name={icons[category]} size={16} color="#fff" />
+              <Text style={styles.buttonText}>{category}</Text>
+            </View>
+          }
+          onPress={() => setSelectedCategory(category)}
+          colors={selectedCategory === category ? ['#D0A0D0', '#8F508F'] : ['#8F508F', '#8F508F', '#8F508F']}
+        />
+      ))}
+    </View>
+  );
+
+  const scrollToTop = () => {
+    if (listRef.current) {
+      listRef.current.scrollToLocation({ sectionIndex: 0, itemIndex: 0, animated: true });
+    }
+  };
+
   return (
     <View style={currentStyles.container}>
-      <View style={styles.categoryContainer}>
-        {categories.map((category) => (
-          <GradientButton
-            key={category}
-            title={
-              <View style={styles.buttonContent}>
-                <Ionicons name={icons[category]} size={16} color="#fff" />
-                <Text style={styles.buttonText}>{category}</Text>
-              </View>
-            }
-            onPress={() => setSelectedCategory(category)}
-            colors={selectedCategory === category ? ['#D0A0D0', '#8F508F'] : ['#8F508F', '#8F508F', '#8F508F']}
-          />
-        ))}
-      </View>
       <SectionList
+        ref={listRef}
         sections={filteredSections}
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
         keyExtractor={(item, index) => item[0]?.Field1 || `section-${index}`}
         contentContainerStyle={currentStyles.sectionList}
+        stickySectionHeadersEnabled={false}
+        ListHeaderComponent={renderCategorySelector}
       />
+      <TouchableOpacity style={styles.fab} onPress={scrollToTop}>
+        <Ionicons name="arrow-up-circle" size={56} color="#8F508F" />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -112,6 +128,12 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     marginLeft: 5,
+  },
+  fab: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    backgroundColor: 'transparent',
   },
 });
 

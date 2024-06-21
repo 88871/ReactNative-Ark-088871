@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, Modal, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Animated, StyleSheet, TouchableOpacity } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { categorizeDinosaurs } from "./components/utils";
 import Navbar from "./components/Navbar";
 import DinoList from "./components/DinoList";
@@ -9,16 +11,15 @@ import { lightTheme, darkTheme } from "./components/Theme";
 import { dinosaurs } from "./assets/creatures";
 import CommandsComponent from "./components/CommandsComponent";
 import ArkServerLookup from "./components/ArkServerLookup";
-import TekGeneratorCalculator from "./components/TekGeneratorCalculator"; // Add this line
-import KibblePage from "./components/KibblePage"; // Add this line
+import TekGeneratorCalculator from "./components/TekGeneratorCalculator";
+import KibblePage from "./components/KibblePage";
+import ItemPage from "./components/ItemPage";
+import ItemDetails from "./components/ItemDetails";
 
-export default function App() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [currentTab, setCurrentTab] = useState("dinolist");
+const Stack = createStackNavigator();
+
+const HomeScreen = ({ isDarkMode, currentTab, searchQuery, setSearchQuery, setMenuOpen }) => {
   const sections = categorizeDinosaurs(dinosaurs);
-
   const filteredSections = sections
     .map((section) => ({
       ...section,
@@ -36,35 +37,8 @@ export default function App() {
     }))
     .filter((section) => section.data.length > 0);
 
-  const currentStyles = isDarkMode ? darkTheme : lightTheme;
-
   return (
-    <View style={[styles.container, currentStyles.container]}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={menuOpen}
-        onRequestClose={() => setMenuOpen(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <Sidebar
-            isDarkMode={isDarkMode}
-            setMenuOpen={setMenuOpen}
-            setCurrentTab={setCurrentTab}
-          />
-          <TouchableOpacity
-            style={styles.modalBackdrop}
-            onPress={() => setMenuOpen(false)}
-          />
-        </View>
-      </Modal>
-      <Navbar
-        isDarkMode={isDarkMode}
-        setIsDarkMode={setIsDarkMode}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        setMenuOpen={setMenuOpen}
-      />
+    <>
       {currentTab === "dinolist" && (
         <DinoList sections={filteredSections} isDarkMode={isDarkMode} />
       )}
@@ -78,23 +52,109 @@ export default function App() {
         <TekGeneratorCalculator isDarkMode={isDarkMode} />
       )}
       {currentTab === "kibble" && (
-        <KibblePage />
+        <KibblePage isDarkMode={isDarkMode} />
       )}
-      <StatusBar style="auto" />
-    </View>
+      {currentTab === "items" && (
+        <ItemPage isDarkMode={isDarkMode} />
+      )}
+    </>
   );
 };
+
+export default function App() {
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [currentTab, setCurrentTab] = useState("dinolist");
+  const animation = useRef(new Animated.Value(-250)).current;
+  const navigationRef = useRef(null);
+
+  useEffect(() => {
+    if (menuOpen) {
+      Animated.timing(animation, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: false,
+      }).start();
+    } else {
+      Animated.timing(animation, {
+        toValue: -250,
+        duration: 300,
+        useNativeDriver: false,
+      }).start();
+    }
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (currentTab !== "dinolist") {
+      navigationRef.current?.navigate("Home");
+    }
+  }, [currentTab]);
+
+  const currentStyles = isDarkMode ? darkTheme : lightTheme;
+
+  return (
+    <NavigationContainer ref={navigationRef}>
+      <View style={[styles.container, currentStyles.container]}>
+        {menuOpen && <TouchableOpacity style={styles.modalBackdrop} onPress={() => setMenuOpen(false)} />}
+        <Animated.View style={[styles.sidebarContainer, { transform: [{ translateX: animation }] }]}>
+          <Sidebar
+            isDarkMode={isDarkMode}
+            setMenuOpen={setMenuOpen}
+            setCurrentTab={setCurrentTab}
+          />
+        </Animated.View>
+        <Navbar
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          setMenuOpen={setMenuOpen}
+          toggleTheme={() => setIsDarkMode(prevMode => !prevMode)}
+        />
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Home">
+            {props => (
+              <HomeScreen
+                {...props}
+                isDarkMode={isDarkMode}
+                currentTab={currentTab}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                setMenuOpen={setMenuOpen}
+              />
+            )}
+          </Stack.Screen>
+          <Stack.Screen name="ItemDetails">
+            {props => <ItemDetails {...props} isDarkMode={isDarkMode} />}
+          </Stack.Screen>
+        </Stack.Navigator>
+        <StatusBar style="auto" />
+      </View>
+    </NavigationContainer>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  modalOverlay: {
-    flex: 1,
-    flexDirection: "row",
+  sidebarContainer: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    bottom: 0,
+    width: 250,
+    zIndex: 1000,
+    backgroundColor: "#121212",
   },
   modalBackdrop: {
-    flex: 1,
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
+    zIndex: 999,
   },
 });
